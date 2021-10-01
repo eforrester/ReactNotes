@@ -1,0 +1,92 @@
+--------------------------------------------------------------------------------------------
+- React is an open source view library used to render the UI of web apps
+- Uses a syntax extension of JS called JSX that allows you to write HTML  directly within JS
+	Benefits: 
+	- Use the full programmatic power of JS within HTML
+	- Keeps code readable
+- JS is included directly within JSX using curly braces {} 
+- We can render JSX directly into the HTML DOM using React's rendering API -> ReactDOM
+
+- JSX must return a single element, a parent element that wraps all nested elements
+- JSX uses className to define classes 
+- Self-closing tags <div /> can also be used, but cannot include anything within
+
+--------------------------------------------------------------------------------------------
+
+ReactDOM.render(componentToRender, targetNode) 
+ReactDOM.render(JSX, document.getElementById('root'))
+
+- Function that places JXS into React's DOM
+First argument: React element or component you want to render
+Second argument: DOM node you want to render the component to
+(Must be called after JSX element declarations) 
+
+- JSX elements passs in the name of the elmement you want to render
+- React components use the same syntax as if you were rendering a nested component 
+	(Same syntax for ES6 class components and functional components) 
+ex. ReactDOM.render(<ComponentToRender />, targetNode)
+
+++ Example of Rendering ++
+Renders the Car and Motorcycle components within TypesOfVehicles to the node-id div 
+class TypesOfVehicles extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>Types of Vehicles:</h1>
+        <Car />
+        <Motorcycle />
+      </div>
+    );
+  }
+}
+ReactDOM.render(<TypesOfVehicles />, document.getElementById("node-id"));
+++++++++++++++++++++++++
+
+--------------------------------------------------------------------------------------------
+// COMPONENTS
+- Components are the core of react, everything in react is a component
+2 ways to create a component: 
+
+1. Stateless functional component -> using JS
+(Can receive data and render it, but does not manage or track changes to that data) 
+- Write a JS function that either returns JSX or null. STARTS WITH CAPITAL LETTER
+
+ex. 
+const DemoComponent = function() {
+  return (
+    <div className='customClass' />
+  );
+}
+
+
+
+2. ES6 class syntax
+ex.
+class Kitten extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <h1>Hi</h1>
+    );
+  }
+}
+(Also notice the Kitten class has a constructor defined within it that calls super(). It uses super() to call the constructor of the parent class, in this case React.Component. The constructor is a special method used during the initialization of objects that are created with the class keyword. It is best practice to call a component's constructor with super, and pass props to both. This makes sure the component is initialized properly. For now, know that it is standard for this code to be included. Soon you will see other uses for the constructor as well as props.)
+--------------------------------------------------------------------------------------------
+
+- Apps are typically parents, while components (navbar, dashboard, footer, etc) are children
+- To render component as a child, include as a custom HTML tag in the JSX
+(for ex- in render you write: 
+return (
+ <App>
+  <Navbar />
+  <Dashboard />
+  <Footer />
+ </App>
+)
+- JSX elements, stateless functional components, andES6 Cclass components can all be rendered within other components
